@@ -1,6 +1,7 @@
 <?php
 /**
- * Classe para tratar as requisições web via CURL
+ * Classe para tratar as requisições web
+ *
  */
 class Crawler{
 
@@ -277,11 +278,7 @@ class Crawler{
 		$result=curl_exec ($curlObj);
 		curl_close ($curlObj);
 		
-		///$this->setResult($result);*/
-		
 			
-		//var_dump($result); die(); 
-				
 		$hRequest = array();	
 		$cRequest = array();
 			
@@ -349,5 +346,8 @@ class Crawler{
 		return $text;
 	}
 	 
+	
+	
+	
 }
 ?>
