@@ -3,8 +3,8 @@
   require_once 'crawler.php';
   
  
-	$cw = new Crawler();
-	$cw->setURL('https://www.site.com/')	
+	$cw = new Crawler('https://www.site.com/');
+	///$cw->setURL('https://www.site.com/')	 //<< se nao passar a URL no construtor pode passar direto no metodo setURL
 	
 		/*
 		->addHeader('cabecalho-1','valor-1')
