@@ -2,16 +2,26 @@
 /**
  * Classe para tratar as requisições web
  *
- */
+ */ 
 class Crawler{
 
-	public function __construct(){
+	/**
+	 * construtor da classe
+	 *
+	 * @param String $URL opcional
+	 * @return $this
+	 */
+	public function __construct($URL=null){
 		/**
 		 * gosto de setar para liberar mais memoria e tempo para evitar que o script falhe 
 		 * caso o servidor de destino esteja lento 
 		 */
 		ini_set('memory_limit','512M');
 		ini_set('max_execution_time', 60);
+		
+		if (isset($URL)){
+			$this->setURL($URL);
+		}
 
 		return $this;
 	}
@@ -316,11 +326,7 @@ class Crawler{
 		return $this;
 	}
 	
-	
-	
-	
-	
-	
+		
 	/**
 	 * extrai uma String dentro de uma sequencia maior
 	 *
@@ -346,8 +352,5 @@ class Crawler{
 		return $text;
 	}
 	 
-	
-	
-	
 }
 ?>
