@@ -4,14 +4,14 @@
   
  
 	$cw = new Crawler('https://www.site.com/');
-	///$cw->setURL('https://www.site.com/')	 //<< se nao passar a URL no construtor pode passar direto no metodo setURL
+	///$cw->setURL('https://www.site.com/');	 //<< se nao passar a URL no construtor pode passar direto no metodo setURL
 	
 		/*
-		->addHeader('cabecalho-1','valor-1')
+		$cw->addHeader('cabecalho-1','valor-1')
 		->addHeader('cabecalho-2','valor-2')
 		*/
     //exemplos de headers:
-		->addHeader('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0')
+		$cw->addHeader('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0')
 		->addHeader('Accept',' text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
 		->addHeader('Accept-Language','pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3')
 		->addHeader('Connection','keep-alive')
