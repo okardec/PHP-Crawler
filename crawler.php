@@ -22,6 +22,8 @@ class Crawler{
 		if (isset($URL)){
 			$this->setURL($URL);
 		}
+		
+		$this->setPostDataJson(false);
 
 		return $this;
 	}
@@ -285,12 +287,16 @@ class Crawler{
 		///seta para retornar os cabeçalhos
 		curl_setopt($curlObj, CURLOPT_HEADER, 1);
 		
+		curl_setopt ($curlObj, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt ($curlObj, CURLOPT_SSL_VERIFYPEER, 0); 
+
+		
 		$result=curl_exec ($curlObj);
-		curl_close ($curlObj);
+		
 		
 			
-		$hRequest = array();	
-		$cRequest = array();
+		/*$hRequest = array();	
+		$cRequest = array();*/
 			
 		$output = rtrim($result);
 		$data = explode("\n",$result);		
@@ -299,30 +305,15 @@ class Crawler{
 		
 		
 		///isola os dados do header e do conteudo
-		$isHeader = true;
-		foreach($data as $part){
+		$header_size = curl_getinfo($curlObj, CURLINFO_HEADER_SIZE);
+		$hRequest = substr($result, 0, $header_size);
+		$cRequest = substr($result, $header_size);
+
+		$this->setResultHeader(explode("\n",trim($hRequest)));
+		$this->setResult(trim($cRequest));
 		
-			if ($isHeader){
-			    //alguns cabeçalhos contem o caractere ":" por exemplo "Location"
-			    $middle = explode(":",$part,2);				   
-			    if ( !isset($middle[1]) ) { $middle[1] = null; }		
-			    
-			    //nos testes que fiz, o header tem uma separação em branco do conteudo, aqui divido ambos
-			    if (strlen(trim($middle[0])) > 0 && strlen(trim($middle[1])) > 0){
-			   		$hRequest[trim($middle[0])] = trim($middle[1]);
-			    }else{
-			    	$isHeader = false;
-			    }
-			    
-			}else{
-				$cRequest[] = $part;
-			}
-		    
-		}
-		
-		$this->setResultHeader($hRequest);
-		$this->setResult(trim(implode("\n",$cRequest)));
- 	
+		curl_close ($curlObj);
+				 	
 		return $this;
 	}
 	
